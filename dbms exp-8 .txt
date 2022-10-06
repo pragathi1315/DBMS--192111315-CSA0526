@@ -1,0 +1,143 @@
+
+mysql>  use db;
+Database changed
+mysql> Database changed
+    -> mysql> select * from department;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Database changed
+mysql> select * from department' at line 1
+mysql> +--------+----------+----------+
+    -> | deptno | deptname | depthead |
+    -> +--------+----------+----------+
+    -> |    315 | raja     | kajol    |
+    -> |    456 | pragathi | prabhas  |
+    -> |    415 | jeshu    | rana     |
+    -> +--------+----------+----------+
+    -> 3 rows in set (0.00 sec)
+    ->
+    -> mysql> select deptno,'deptname'
+    ->     -> from department where 'deptname' in( select 'deptname' from department where 'depthead'=prabhas;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '+--------+----------+----------+
+| deptno | deptname | depthead |
++--------+----' at line 1
+mysql> ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ERROR 1064 (42000): You have an error in your SQL syntax' at line 1
+    -> mysql>
+    -> mysql> select deptno,deptname
+    ->     -> from department where deptname in( select deptname from department where depthead=prabhas;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the manual that corresponds to your MySQL server version for the right syntax to' at line 1
+mysql> ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ERROR 1064 (42000): You have an error in your SQL syntax' at line 1
+    -> mysql> select deptno,deptname
+    ->     -> from department where deptname in( select deptname from department where depthead=prabhas);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the manual that corresponds to your MySQL server version for the right syntax to' at line 1
+mysql> ERROR 1054 (42S22): Unknown column 'prabhas' in 'where clause'
+    -> mysql> select deptno,deptname
+    ->     -> from department where deptname in( select deptname from department where depthead='prabhas');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ERROR 1054 (42S22): Unknown column 'prabhas' in 'where clause'
+mysql> select dep' at line 1
+mysql> +--------+----------+
+    -> | deptno | deptname |
+    -> +--------+----------+
+    -> |    456 | pragathi |
+    -> +--------+----------+
+    -> 1 row in set (0.00 sec)
+    ->
+    -> mysql> desc department;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '+--------+----------+
+| deptno | deptname |
++--------+----------+
+|    456 | pra' at line 1
+mysql> +----------+----------+------+-----+---------+-------+
+    -> | Field    | Type     | Null | Key | Default | Extra |
+    -> +----------+----------+------+-----+---------+-------+
+    -> | deptno   | int(10)  | YES  |     | NULL    |       |
+    -> | deptname | char(20) | YES  |     | NULL    |       |
+    -> | depthead | char(20) | YES  |     | NULL    |       |
+    -> +----------+----------+------+-----+---------+-------+
+    -> 3 rows in set (0.03 sec)
+    ->
+    -> mysql> create table faculty(facid int(10),facname char(10),mobileno int(10),gender char(10));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '+----------+----------+------+-----+---------+-------+
+| Field    | Type     | N' at line 1
+mysql> ERROR 1050 (42S01): Table 'faculty' already exists
+    -> mysql> create table  college( clgname char(10),clgbranch int(10), city char(10));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ERROR 1050 (42S01): Table 'faculty' already exists
+mysql> create table  college(' at line 1
+mysql> Query OK, 0 rows affected (0.02 sec)
+    ->
+    -> mysql> desc college;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc college' at line 1
+mysql> +-----------+----------+------+-----+---------+-------+
+    -> | Field     | Type     | Null | Key | Default | Extra |
+    -> +-----------+----------+------+-----+---------+-------+
+    -> | clgname   | char(10) | YES  |     | NULL    |       |
+    -> | clgbranch | int(10)  | YES  |     | NULL    |       |
+    -> | city      | char(10) | YES  |     | NULL    |       |
+    -> +-----------+----------+------+-----+---------+-------+
+    -> 3 rows in set (0.02 sec)
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '+-----------+----------+------+-----+---------+-------+
+| Field     | Type     |' at line 1
+mysql> insert into college(clgname,clgbranch)
+    -> select clgname ,clgbranch
+    ->  from department where deptno=315;
+ERROR 1054 (42S22): Unknown column 'clgname' in 'field list'
+mysql> insert into college ('clgname',clgbranch)
+    -> select 'clgname',clgbranch
+    -> from department where deptno=315;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''clgname',clgbranch)
+select 'clgname',clgbranch
+from department where deptno=315' at line 1
+mysql> insert into college ('clgname',clgbranch)
+    ->     -> select 'clgname',clgbranch
+    -> from department where deptno=315;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''clgname',clgbranch)
+    -> select 'clgname',clgbranch
+from department where dep' at line 1
+mysql> create table principal ( name char(10), phoneno int(10));
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> desc principal;
++---------+----------+------+-----+---------+-------+
+| Field   | Type     | Null | Key | Default | Extra |
++---------+----------+------+-----+---------+-------+
+| name    | char(10) | YES  |     | NULL    |       |
+| phoneno | int(10)  | YES  |     | NULL    |       |
++---------+----------+------+-----+---------+-------+
+2 rows in set (0.02 sec)
+
+mysql> insert into principal( name,phoneno)
+    -> select name,phoneno
+    -> from department where deptname='jeshu';
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+mysql> insert into principal( name,phoneno)
+    ->     -> select name,phoneno
+    ->     -> from department where name='jeshu';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> select name,phoneno
+    -> from department where name='jeshu'' at line 2
+mysql> create table principal ( name char(10),phoneno int (10), city char(10));
+ERROR 1050 (42S01): Table 'principal' already exists
+mysql> create table dean ( name char(10),phoneno int (10), city char(10));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc dean;
++---------+----------+------+-----+---------+-------+
+| Field   | Type     | Null | Key | Default | Extra |
++---------+----------+------+-----+---------+-------+
+| name    | char(10) | YES  |     | NULL    |       |
+| phoneno | int(10)  | YES  |     | NULL    |       |
+| city    | char(10) | YES  |     | NULL    |       |
++---------+----------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql> insert into dean(name,phoneno,city)
+    -> select id_no,name
+    -> ;
+ERROR 1054 (42S22): Unknown column 'id_no' in 'field list'
+mysql> insert into dean ( name,phoneno,city)
+    -> select name,phoneno,city
+    -> from department where deptname='jeshu';
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+mysql>
