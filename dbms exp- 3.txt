@@ -1,0 +1,100 @@
+
+mysql> use db;
+Database changed
+mysql> show tables;
++--------------+
+| Tables_in_db |
++--------------+
+| department   |
+| faculty      |
+| student      |
++--------------+
+3 rows in set (0.00 sec)
+
+mysql> desc student;
++----------+----------+------+-----+---------+-------+
+| Field    | Type     | Null | Key | Default | Extra |
++----------+----------+------+-----+---------+-------+
+| Regno    | int(10)  | YES  |     | NULL    |       |
+| name     | char(10) | YES  |     | NULL    |       |
+| gender   | char(10) | NO   | PRI |         |       |
+| dob      | int(10)  | NO   |     | 0       |       |
+| mobileno | int(10)  | YES  |     | NULL    |       |
++----------+----------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into student values(315,'raja',1234567),(035,'ram',5678901),(456,'pragathi',0987654);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql>  insert into student values(315,'raja','m',2003/05/23,1234567),(035,'ram','m',2003/10/05,5678901),(456,'pragathi','f',1994/10/17,0987654);
+ERROR 1062 (23000): Duplicate entry 'm' for key 'PRIMARY'
+mysql> insert into student values(315,'raja',2003/05/23,1234567),(035,'ram',2003/10/05,5678901),(456,'pragathi',1994/10/17,0987654);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql>  insert into student values(315,'raja','m',2003/05/23,1234567),(035,'ram','m',2003/10/05,5678901),(456,'pragathi','f',1994/10/17,0987654);
+ERROR 1062 (23000): Duplicate entry 'm' for key 'PRIMARY'
+mysql> create table student(regno int(10),name char(10),mobileno int(10));
+ERROR 1050 (42S01): Table 'student' already exists
+mysql> create table student(fac_id int(10),fac_name char(10),mobile_no int(10));
+ERROR 1050 (42S01): Table 'student' already exists
+mysql> create table faculty(fac_id int(10),fac_name char(10),mobile_no int(10));
+ERROR 1050 (42S01): Table 'faculty' already exists
+mysql> desc faculty;
++----------+----------+------+-----+---------+-------+
+| Field    | Type     | Null | Key | Default | Extra |
++----------+----------+------+-----+---------+-------+
+| facno    | int(10)  | YES  |     | NULL    |       |
+| facname  | char(10) | YES  |     | NULL    |       |
+| gender   | char(10) | YES  | MUL | NULL    |       |
+| dob      | char(10) | YES  |     | NULL    |       |
+| doj      | int(10)  | YES  |     | NULL    |       |
+| mobileno | int(10)  | YES  | UNI | NULL    |       |
+| dept     | char(10) | YES  |     | NULL    |       |
++----------+----------+------+-----+---------+-------+
+7 rows in set (0.03 sec)
+
+mysql> desc department;
++----------+----------+------+-----+---------+-------+
+| Field    | Type     | Null | Key | Default | Extra |
++----------+----------+------+-----+---------+-------+
+| deptno   | int(10)  | YES  |     | NULL    |       |
+| deptname | char(20) | YES  |     | NULL    |       |
+| depthead | char(20) | YES  |     | NULL    |       |
++----------+----------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> insert into department values(315,'raja','kajol'),(035,'ram','rahul'),(456,'pragathi','prabhas');
+Query OK, 3 rows affected (0.03 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from department;
++--------+----------+----------+
+| deptno | deptname | depthead |
++--------+----------+----------+
+|    315 | raja     | kajol    |
+|     35 | ram      | rahul    |
+|    456 | pragathi | prabhas  |
++--------+----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select deptname from department;
++----------+
+| deptname |
++----------+
+| raja     |
+| ram      |
+| pragathi |
++----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from department where='pragathi';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '='pragathi'' at line 1
+mysql> select * from department where name ='pragathi';
+ERROR 1054 (42S22): Unknown column 'name' in 'where clause'
+mysql> select * from department where deptname='pragathi';
++--------+----------+----------+
+| deptno | deptname | depthead |
++--------+----------+----------+
+|    456 | pragathi | prabhas  |
++--------+----------+----------+
+1 row in set (0.00 sec)
+
+mysql>
