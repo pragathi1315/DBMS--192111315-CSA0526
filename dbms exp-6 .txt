@@ -1,0 +1,93 @@
+
+
+mysql> use db;
+Database changed
+mysql> select *
+    ->  se;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'se' at line 2
+mysql> select * from department
+    -> where deptname in ('ram','pragathi');
++--------+----------+----------+
+| deptno | deptname | depthead |
++--------+----------+----------+
+|    456 | pragathi | prabhas  |
++--------+----------+----------+
+1 row in set (0.00 sec)
+
+mysql> select * from department
+    -> where deptno between 34 and 456;
++--------+----------+----------+
+| deptno | deptname | depthead |
++--------+----------+----------+
+|    315 | raja     | kajol    |
+|    456 | pragathi | prabhas  |
++--------+----------+----------+
+2 rows in set (0.00 sec)
+
+mysql> select * from department
+    -> where deptno between 34 and 456;
++--------+----------+----------+
+| deptno | deptname | depthead |
++--------+----------+----------+
+|    315 | raja     | kajol    |
+|    456 | pragathi | prabhas  |
++--------+----------+----------+
+2 rows in set (0.00 sec)
+
+mysql> select * from department
+    -> where deptno not between 34 and 456;
+Empty set (0.00 sec)
+
+mysql> select count ( deptname) from department;
+ERROR 1630 (42000): FUNCTION db.count does not exist. Check the 'Function Name Parsing and Resolution' section in the Reference Manual
+mysql> select count ( deptname) from department
+    -> ;
+ERROR 1630 (42000): FUNCTION db.count does not exist. Check the 'Function Name Parsing and Resolution' section in the Reference Manual
+mysql> insert into department values ( 415,'jeshu','rana');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> desc department;
++----------+----------+------+-----+---------+-------+
+| Field    | Type     | Null | Key | Default | Extra |
++----------+----------+------+-----+---------+-------+
+| deptno   | int(10)  | YES  |     | NULL    |       |
+| deptname | char(20) | YES  |     | NULL    |       |
+| depthead | char(20) | YES  |     | NULL    |       |
++----------+----------+------+-----+---------+-------+
+3 rows in set (0.03 sec)
+
+mysql> select* from department ;
++--------+----------+----------+
+| deptno | deptname | depthead |
++--------+----------+----------+
+|    315 | raja     | kajol    |
+|    456 | pragathi | prabhas  |
+|    415 | jeshu    | rana     |
++--------+----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from department
+    -> where  deptname not between raja and jeshu;
+ERROR 1054 (42S22): Unknown column 'raja' in 'where clause'
+mysql> select * from department
+    -> where deptname not between 'raja' and 'jeshu';
++--------+----------+----------+
+| deptno | deptname | depthead |
++--------+----------+----------+
+|    315 | raja     | kajol    |
+|    456 | pragathi | prabhas  |
+|    415 | jeshu    | rana     |
++--------+----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select count ( deptname) from department;
+ERROR 1630 (42000): FUNCTION db.count does not exist. Check the 'Function Name Parsing and Resolution' section in the Reference Manual
+mysql> select count(deptname) from department;
++-----------------+
+| count(deptname) |
++-----------------+
+|               3 |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql>
