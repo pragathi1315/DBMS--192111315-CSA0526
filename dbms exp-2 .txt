@@ -1,0 +1,118 @@
+
+
+mysql> use db;
+Database changed
+mysql> desc student;
++----------+----------+------+-----+---------+-------+
+| Field    | Type     | Null | Key | Default | Extra |
++----------+----------+------+-----+---------+-------+
+| Regno    | int(10)  | YES  |     | NULL    |       |
+| name     | char(10) | YES  |     | NULL    |       |
+| gender   | char(10) | YES  |     | NULL    |       |
+| dob      | int(10)  | YES  |     | NULL    |       |
+| mobileno | int(10)  | YES  |     | NULL    |       |
++----------+----------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table student add primary key(dob);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++----------+----------+------+-----+---------+-------+
+| Field    | Type     | Null | Key | Default | Extra |
++----------+----------+------+-----+---------+-------+
+| Regno    | int(10)  | YES  |     | NULL    |       |
+| name     | char(10) | YES  |     | NULL    |       |
+| gender   | char(10) | YES  |     | NULL    |       |
+| dob      | int(10)  | NO   | PRI | 0       |       |
+| mobileno | int(10)  | YES  |     | NULL    |       |
++----------+----------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+mysql> desc faculty;
++----------+----------+------+-----+---------+-------+
+| Field    | Type     | Null | Key | Default | Extra |
++----------+----------+------+-----+---------+-------+
+| facno    | int(10)  | YES  |     | NULL    |       |
+| facname  | char(10) | YES  |     | NULL    |       |
+| gender   | char(10) | YES  |     | NULL    |       |
+| dob      | char(10) | YES  |     | NULL    |       |
+| doj      | int(10)  | YES  |     | NULL    |       |
+| mobileno | int(10)  | YES  |     | NULL    |       |
+| dept     | char(10) | YES  |     | NULL    |       |
++----------+----------+------+-----+---------+-------+
+7 rows in set (0.02 sec)
+
+mysql> alter table faculty add foreign key(dob) references student(name);
+ERROR 1005 (HY000): Can't create table 'db.#sql-15630_3' (errno: 150)
+mysql> alter table faculty add foreign key(dob) references student(dob);
+ERROR 1005 (HY000): Can't create table 'db.#sql-15630_3' (errno: 150)
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>  alter table faculty add foreign key(name) references student(name);
+ERROR 1072 (42000): Key column 'name' doesn't exist in table
+mysql> alter table faculty add foreign key(facname) references student(facname);
+ERROR 1005 (HY000): Can't create table 'db.#sql-15630_3' (errno: 150)
+mysql> alter table faculty
+    -> add foreign key(dob) references student(dob);
+ERROR 1005 (HY000): Can't create table 'db.#sql-15630_3' (errno: 150)
+mysql> alter table faculty
+    -> add foreign key(dob) references student(dob);
+ERROR 1005 (HY000): Can't create table 'db.#sql-15630_3' (errno: 150)
+mysql> alter table student
+    -> drop primary key;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table student add primary key(gender);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table faculty
+    -> add foreign key(gender) references student(gender);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc faculty;
++----------+----------+------+-----+---------+-------+
+| Field    | Type     | Null | Key | Default | Extra |
++----------+----------+------+-----+---------+-------+
+| facno    | int(10)  | YES  |     | NULL    |       |
+| facname  | char(10) | YES  |     | NULL    |       |
+| gender   | char(10) | YES  | MUL | NULL    |       |
+| dob      | char(10) | YES  |     | NULL    |       |
+| doj      | int(10)  | YES  |     | NULL    |       |
+| mobileno | int(10)  | YES  |     | NULL    |       |
+| dept     | char(10) | YES  |     | NULL    |       |
++----------+----------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> alter table faculty add unique (mobileno);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc faculty;
++----------+----------+------+-----+---------+-------+
+| Field    | Type     | Null | Key | Default | Extra |
++----------+----------+------+-----+---------+-------+
+| facno    | int(10)  | YES  |     | NULL    |       |
+| facname  | char(10) | YES  |     | NULL    |       |
+| gender   | char(10) | YES  | MUL | NULL    |       |
+| dob      | char(10) | YES  |     | NULL    |       |
+| doj      | int(10)  | YES  |     | NULL    |       |
+| mobileno | int(10)  | YES  | UNI | NULL    |       |
+| dept     | char(10) | YES  |     | NULL    |       |
++----------+----------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql>
