@@ -1,0 +1,63 @@
+
+mysql> use db;
+Database changed
+mysql> select * from department;
++--------+----------+----------+
+| deptno | deptname | depthead |
++--------+----------+----------+
+|    315 | raja     | kajol    |
+|    456 | pragathi | prabhas  |
+|    415 | jeshu    | rana     |
++--------+----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from department order by depthead;
++--------+----------+----------+
+| deptno | deptname | depthead |
++--------+----------+----------+
+|    315 | raja     | kajol    |
+|    456 | pragathi | prabhas  |
+|    415 | jeshu    | rana     |
++--------+----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from department order by deptno;
++--------+----------+----------+
+| deptno | deptname | depthead |
++--------+----------+----------+
+|    315 | raja     | kajol    |
+|    415 | jeshu    | rana     |
+|    456 | pragathi | prabhas  |
++--------+----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from department order by depthead;
++--------+----------+----------+
+| deptno | deptname | depthead |
++--------+----------+----------+
+|    315 | raja     | kajol    |
+|    456 | pragathi | prabhas  |
+|    415 | jeshu    | rana     |
++--------+----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from department group by depathead;
+ERROR 1054 (42S22): Unknown column 'depathead' in 'group statement'
+mysql> select * from department group by 'depthead';
++--------+----------+----------+
+| deptno | deptname | depthead |
++--------+----------+----------+
+|    315 | raja     | kajol    |
++--------+----------+----------+
+1 row in set (0.00 sec)
+
+mysql> select * from department having deptno > 320;
++--------+----------+----------+
+| deptno | deptname | depthead |
++--------+----------+----------+
+|    456 | pragathi | prabhas  |
+|    415 | jeshu    | rana     |
++--------+----------+----------+
+2 rows in set (0.00 sec)
+
+mysql>
