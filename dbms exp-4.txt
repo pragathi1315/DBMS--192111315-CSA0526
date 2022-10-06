@@ -1,0 +1,78 @@
+
+mysql> use db;
+Database changed
+mysql> desc department;
++----------+----------+------+-----+---------+-------+
+| Field    | Type     | Null | Key | Default | Extra |
++----------+----------+------+-----+---------+-------+
+| deptno   | int(10)  | YES  |     | NULL    |       |
+| deptname | char(20) | YES  |     | NULL    |       |
+| depthead | char(20) | YES  |     | NULL    |       |
++----------+----------+------+-----+---------+-------+
+3 rows in set (0.03 sec)
+
+mysql> select * from department;
++--------+----------+----------+
+| deptno | deptname | depthead |
++--------+----------+----------+
+|    315 | raja     | kajol    |
+|     35 | ram      | rahul    |
+|    456 | pragathi | prabhas  |
++--------+----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> udate department
+    -> set mobile_no=123456
+    -> where deptno=315;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'udate department
+set mobile_no=123456
+where deptno=315' at line 1
+mysql> udate department
+    ->     -> set mobile_no=123456
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'udate department
+    -> set mobile_no=123456' at line 1
+mysql> update department
+    -> set mobileno=1234564
+    -> where deptno=765;
+ERROR 1054 (42S22): Unknown column 'mobileno' in 'field list'
+mysql> update department
+    -> set depthead=kajol
+    -> where deptno=315;
+ERROR 1054 (42S22): Unknown column 'kajol' in 'field list'
+mysql> update department
+    -> set depthead=prabhas
+    -> where deptno=456;
+ERROR 1054 (42S22): Unknown column 'prabhas' in 'field list'
+mysql> update department
+    -> set depthead='prabhas'
+    -> where deptno=456;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> select * from department;
++--------+----------+----------+
+| deptno | deptname | depthead |
++--------+----------+----------+
+|    315 | raja     | kajol    |
+|     35 | ram      | rahul    |
+|    456 | pragathi | prabhas  |
++--------+----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> delete department;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> delete from department
+    -> where deptno=35;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from department;
++--------+----------+----------+
+| deptno | deptname | depthead |
++--------+----------+----------+
+|    315 | raja     | kajol    |
+|    456 | pragathi | prabhas  |
++--------+----------+----------+
+2 rows in set (0.00 sec)
+
+mysql>
