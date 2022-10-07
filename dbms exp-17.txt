@@ -1,0 +1,27 @@
+
+
+mysql> use dbms;
+Database changed
+mysql> selectr * from college;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selectr * from college' at line 1
+mysql> select * from college;
++----------+-----------+----------+------+
+| name     | branch    | city     | dept |
++----------+-----------+----------+------+
+| jeshu    | tamilnadu | paris    | cse  |
+| nagavasu | goa       | bejawada | ece  |
+| ashwanth | bangalore | swedon   | cse  |
++----------+-----------+----------+------+
+3 rows in set (0.00 sec)
+
+mysql> select repeat(dept,2) from college;
++----------------+
+| repeat(dept,2) |
++----------------+
+| csecse         |
+| csecse         |
+| eceece         |
++----------------+
+3 rows in set (0.01 sec)
+
+mysql>
