@@ -1,0 +1,50 @@
+
+
+mysql> use dbms;
+Database changed
+mysql> select * from dean;
++------------+------+---------+------------+------------+
+| name       | id   | phoneno | city       | branch     |
++------------+------+---------+------------+------------+
+| sanjana    |  315 |   12345 | chennai    | tamilnadu  |
+| jayaragini |  525 |   67890 | vizag      | vijayawada |
+| theevasree |  557 |   45678 | ananthapur | bangalore  |
++------------+------+---------+------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from college;
++----------+-----------+----------+------+
+| name     | branch    | city     | dept |
++----------+-----------+----------+------+
+| jeshu    | tamilnadu | paris    | cse  |
+| nagavasu | goa       | bejawada | ece  |
+| ashwanth | bangalore | swedon   | cse  |
++----------+-----------+----------+------+
+3 rows in set (0.00 sec)
+
+mysql> create view phoneno_view as select 'name', phoneno,id from  dean;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from phoneno_view;
++------+---------+------+
+| name | phoneno | id   |
++------+---------+------+
+| name |   12345 |  315 |
+| name |   67890 |  525 |
+| name |   45678 |  557 |
++------+---------+------+
+3 rows in set (0.00 sec)
+
+mysql> create index dept on college(dept);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> show index from college;
++---------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| Table   | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
++---------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| college |          1 | dept     |            1 | dept        | A         |           3 |     NULL | NULL   | YES  | BTREE      |         |               |
++---------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+1 row in set (0.01 sec)
+
+mysql>
