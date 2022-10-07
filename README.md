@@ -23,3 +23,5 @@
 [sqlquries](https://github.com/pragathi1315/DBMS--192111315-CSA0526/blob/main/dbms%20exp-11.txt)
 # exp_13
 [sqlquries](https://github.com/pragathi1315/DBMS--192111315-CSA0526/blob/main/dbms%20exp-13.txt)
+# exp_17
+[sqlquries](https://github.com/pragathi1315/DBMS--192111315-CSA0526/blob/main/dbms%20exp-17.txt)
