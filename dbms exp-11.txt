@@ -1,0 +1,67 @@
+
+
+mysql> use dbms;
+Database changed
+mysql> select*from college;
++----------+-----------+----------+------+
+| name     | branch    | city     | dept |
++----------+-----------+----------+------+
+| jeshu    | tamilnadu | paris    | cse  |
+| nagavasu | goa       | bejawada | ece  |
+| ashwanth | bangalore | swedon   | cse  |
++----------+-----------+----------+------+
+3 rows in set (0.00 sec)
+
+mysql> select name,city
+    -> case
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'case' at line 2
+mysql> select name,city
+    -> case
+    -> when city='goa' then 'cool'
+    -> when city='tamilnadu' then 'heat'
+    -> else ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'case
+when city='goa' then 'cool'
+when city='tamilnadu' then 'heat'
+else' at line 2
+mysql> select name,branch
+    -> case
+    -> when branch='goa' then 'cool'
+    ->  when branch='tamilnadu' then 'heat'
+    -> else 'normal'
+    -> end climatecondition
+    -> from college;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'case
+when branch='goa' then 'cool'
+ when branch='tamilnadu' then 'heat'
+else 'no' at line 2
+mysql> select name,branch,
+    -> case
+    -> when branch='goa' then 'cool'
+    -> when branch='tamilnadu' then 'heat'
+    -> else 'normal'
+    -> end climatecondition
+    -> from college;
++----------+-----------+------------------+
+| name     | branch    | climatecondition |
++----------+-----------+------------------+
+| jeshu    | tamilnadu | heat             |
+| nagavasu | goa       | cool             |
+| ashwanth | bangalore | normal           |
++----------+-----------+------------------+
+3 rows in set (0.01 sec)
+
+mysql> select name,branch,
+    -> if(branch='goa','cool','heat')
+    -> from college;
++----------+-----------+--------------------------------+
+| name     | branch    | if(branch='goa','cool','heat') |
++----------+-----------+--------------------------------+
+| jeshu    | tamilnadu | heat                           |
+| nagavasu | goa       | cool                           |
+| ashwanth | bangalore | heat                           |
++----------+-----------+--------------------------------+
+3 rows in set (0.00 sec)
+
+mysql>
