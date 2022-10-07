@@ -1,0 +1,70 @@
+
+
+mysql> use dbms;
+Database changed
+mysql> desc college;
++--------+----------+------+-----+---------+-------+
+| Field  | Type     | Null | Key | Default | Extra |
++--------+----------+------+-----+---------+-------+
+| name   | char(10) | YES  |     | NULL    |       |
+| branch | char(10) | YES  |     | NULL    |       |
+| city   | char(10) | YES  |     | NULL    |       |
+| dept   | char(10) | YES  | MUL | NULL    |       |
++--------+----------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> create user x;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> grant all on college to x;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for x;
++-----------------------------------------------------+
+| Grants for x@%                                      |
++-----------------------------------------------------+
+| GRANT USAGE ON *.* TO 'x'@'%'                       |
+| GRANT ALL PRIVILEGES ON `dbms`.`college` TO 'x'@'%' |
++-----------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> revoke all on persons from x;
+ERROR 1147 (42000): There is no such grant defined for user 'x' on host '%' on table 'persons'
+mysql> revoke all on college from x;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for x;
++-------------------------------+
+| Grants for x@%                |
++-------------------------------+
+| GRANT USAGE ON *.* TO 'x'@'%' |
++-------------------------------+
+1 row in set (0.00 sec)
+
+mysql> grant select,update on college to x;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for x;
++-----------------------------------------------------+
+| Grants for x@%                                      |
++-----------------------------------------------------+
+| GRANT USAGE ON *.* TO 'x'@'%'                       |
+| GRANT SELECT, UPDATE ON `dbms`.`college` TO 'x'@'%' |
++-----------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> revoke update on college from x;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> shoe grants for x;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'shoe grants for x' at line 1
+mysql> show grants for x;
++---------------------------------------------+
+| Grants for x@%                              |
++---------------------------------------------+
+| GRANT USAGE ON *.* TO 'x'@'%'               |
+| GRANT SELECT ON `dbms`.`college` TO 'x'@'%' |
++---------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql>
