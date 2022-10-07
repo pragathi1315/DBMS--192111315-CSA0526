@@ -1,0 +1,134 @@
+
+
+mysql> use dbms;
+Database changed
+mysql> desc dean;
++---------+----------+------+-----+---------+-------+
+| Field   | Type     | Null | Key | Default | Extra |
++---------+----------+------+-----+---------+-------+
+| name    | char(10) | YES  |     | NULL    |       |
+| id      | int(10)  | YES  |     | NULL    |       |
+| phoneno | int(10)  | YES  |     | NULL    |       |
+| city    | char(10) | YES  |     | NULL    |       |
+| branch  | char(10) | YES  |     | NULL    |       |
++---------+----------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> insert into dean values(('sanjana',315,12345,'chennai','tamilnadu'),('jayaragini',525,67890,'vizag','vijayawada'),('theevasree',557,45678,'ananthapur','bangalore'));
+ERROR 1241 (21000): Operand should contain 1 column(s)
+mysql> insert into dean values('sanjana',315,12345,'chennai','tamilnadu'),('jayaragini',525,67890,'vizag','vijayawada'),('theevasree',557,45678,'ananthapur','bangalore');
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> desc dean;
++---------+----------+------+-----+---------+-------+
+| Field   | Type     | Null | Key | Default | Extra |
++---------+----------+------+-----+---------+-------+
+| name    | char(10) | YES  |     | NULL    |       |
+| id      | int(10)  | YES  |     | NULL    |       |
+| phoneno | int(10)  | YES  |     | NULL    |       |
+| city    | char(10) | YES  |     | NULL    |       |
+| branch  | char(10) | YES  |     | NULL    |       |
++---------+----------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> select * from  dean;
++------------+------+---------+------------+------------+
+| name       | id   | phoneno | city       | branch     |
++------------+------+---------+------------+------------+
+| sanjana    |  315 |   12345 | chennai    | tamilnadu  |
+| jayaragini |  525 |   67890 | vizag      | vijayawada |
+| theevasree |  557 |   45678 | ananthapur | bangalore  |
++------------+------+---------+------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> create table college (name char(10),branch char(10),city char(10),dept char(10));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> desc college;
++--------+----------+------+-----+---------+-------+
+| Field  | Type     | Null | Key | Default | Extra |
++--------+----------+------+-----+---------+-------+
+| name   | char(10) | YES  |     | NULL    |       |
+| branch | char(10) | YES  |     | NULL    |       |
+| city   | char(10) | YES  |     | NULL    |       |
+| dept   | char(10) | YES  |     | NULL    |       |
++--------+----------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> insert into college values('jeshu','tamilnadu','paris','cse'),('nagavasu','goa','bejawada','ece'),('ashwanth','bangalore','swedon','cse');
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select* from dean;
++------------+------+---------+------------+------------+
+| name       | id   | phoneno | city       | branch     |
++------------+------+---------+------------+------------+
+| sanjana    |  315 |   12345 | chennai    | tamilnadu  |
+| jayaragini |  525 |   67890 | vizag      | vijayawada |
+| theevasree |  557 |   45678 | ananthapur | bangalore  |
++------------+------+---------+------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select*from college;
++----------+-----------+----------+------+
+| name     | branch    | city     | dept |
++----------+-----------+----------+------+
+| jeshu    | tamilnadu | paris    | cse  |
+| nagavasu | goa       | bejawada | ece  |
+| ashwanth | bangalore | swedon   | cse  |
++----------+-----------+----------+------+
+3 rows in set (0.00 sec)
+
+mysql> select id, phoneno,name,dept
+    -> from dean,college
+    -> where dept=ece;
+ERROR 1052 (23000): Column 'name' in field list is ambiguous
+mysql> select id, phoneno,name,dept
+    -> from dean,college
+    -> where dept='ece';
+ERROR 1052 (23000): Column 'name' in field list is ambiguous
+mysql> select id, phoneno,'name',dept
+    ->  from dean,college
+    -> where dept='ece';
++------+---------+------+------+
+| id   | phoneno | name | dept |
++------+---------+------+------+
+|  315 |   12345 | name | ece  |
+|  525 |   67890 | name | ece  |
+|  557 |   45678 | name | ece  |
++------+---------+------+------+
+3 rows in set (0.00 sec)
+
+mysql> select id ,phoneno,dept
+    -> from dean
+    -> left outer join college
+    -> on name='nagavasu';
+ERROR 1052 (23000): Column 'name' in on clause is ambiguous
+mysql>  select id ,phoneno,dept
+    ->  from dean
+    -> left outer join college
+    ->  on 'name'='nagavasu';
++------+---------+------+
+| id   | phoneno | dept |
++------+---------+------+
+|  315 |   12345 | NULL |
+|  525 |   67890 | NULL |
+|  557 |   45678 | NULL |
++------+---------+------+
+3 rows in set (0.00 sec)
+
+mysql> select id,'name',dept
+    -> from dean
+    -> right outer join college
+    -> on id=315;
++------+------+------+
+| id   | name | dept |
++------+------+------+
+|  315 | name | cse  |
+|  315 | name | ece  |
+|  315 | name | cse  |
++------+------+------+
+3 rows in set (0.00 sec)
+
+mysql>
