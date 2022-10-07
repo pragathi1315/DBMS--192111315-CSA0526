@@ -1,0 +1,130 @@
+
+
+mysql> use bd;
+Database changed
+mysql> DELIMITER //
+mysql> CREATE FUNCTION LIBRARY(NAME CHAR)
+RETURNS VARCHAR(20)
+DETERMINISTIC
+BEGIN
+DECLARE PASSENGER_CLASS VARCHAR(20);
+S' at line 1
+mysql> DELIMITER //
+mysql> CREATE FUNCTION LIBRARY_BOOKS(BOOK_GENRE CHAR )
+    -> RETURNS VARCHAR(20)
+    -> DETERMINISTIC
+    -> BEGIN
+    -> DECLARE AUTHOR VARCHAR(20);
+    -> SET AUTHOR='';
+    -> IF BOOK_GENRE='LOVE' THEN
+    -> SET READERS FEELING='FIRST';
+    -> ELSEIF BOOK_GENRE ='LOVE' AND BOOK_GENRE='LIFE' THEN
+    -> SET AUTHOR='ROMANCE';
+    -> ELSEIF BOOK_GENRE='LIFE' THEN
+    -> SET READERS FEELING='GODS GIFT ';
+    -> END IF;
+    -> RETURN READERS FEELING;
+    -> END //
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT LIBRARY_BOOKS(LOVES);
+    -> //
++------------------+
+| LIBRARY_BOOKS
+    (LOVES)        |
++------------------+
+| ROMANCE          |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT LIBRARY_BOOKS(LOVES);
+    -> //
++------------------+
+| LIBRARY_BOOKS
+  (LOVES)          |
++------------------+
+| ROMANCE          |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT LIBRARY_BOOKS(LIFE);
+    -> //
++-------------------+
+|LIBRARY_BOOKS(LIFE)|
++-------------------+
+| GODS GIFT         |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT LIBRARY_BOOKS(MUSIC);
+    -> //
++-----------------+
+|LIBRARY_BOOKS    |
+|   (MUSIC)       |
++-----------------+
+| PEACE           |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> DELIMITER $$
+mysql> CREATE PROCEDURE FIND_FACT(IN n INT)
+    -> BEGIN
+    -> SET @@GLOBAL.max_sp_recursion_depth =255;
+    -> SET @@session.max_sp_recursion_depth =255;
+    -> CALL factorial(n,@fact);
+    -> SELECT @fact;
+    -> END
+    -> $$
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> DELIMITER $$
+mysql> CREATE PROCEDURE factorial(IN n INT,OUT fact INT)
+    -> BEGIN
+    -> IF n=1 THEN
+    -> SET fact:=-1;
+    -> ELSE
+    -> CALL factorial(n-1,fact);
+    -> SET fact:=n* fact;
+    -> END IF;
+    -> END
+    -> $$
+Query OK, 0 rows affected (0.01SEC)
+mysql> CALL FIND_FACT(5);
+    -> $$
++-------+
+| @fact |
++-------+
+|  -120 |
++-------+
+1 row in set (0.01 sec)
+
+mysql> USE GH
+Database changed
+mysql> DELIMITER //
+mysql> CREATE FUNCTION FIND_SUM1(A INT, B INT)
+    -> RETURNS INT
+    -> DETERMINISTIC
+    -> BEGIN
+    -> DECLARE SUM INT;
+    -> SET SUM=A+B;
+    -> RETURN SUM;
+    -> END //
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT FIND_SUM1(4,7);
+    -> //
++----------------+
+| FIND_SUM1(4,7) |
++----------------+
+|             11 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT FIND_SUM1(-2,-9);
+    -> //
++------------------+
+| FIND_SUM1(-2,-9) |
++------------------+
+|              -11 |
++------------------+
+1 row in set (0.00 sec)
