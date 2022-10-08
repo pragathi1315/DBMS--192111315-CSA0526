@@ -1,0 +1,115 @@
+
+mysql> use bd
+Database changed
+mysql> create table book_publishing_company
+    -> (book_no int(10),book_name char(20),author char(20),cost int(20));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc book_publishing_company;
++-----------+----------+------+-----+---------+-------+
+| Field     | Type     | Null | Key | Default | Extra |
++-----------+----------+------+-----+---------+-------+
+| book_no   | int(10)  | YES  |     | NULL    |       |
+| book_name | char(20) | YES  |     | NULL    |       |
+| author    | char(20) | YES  |     | NULL    |       |
+| cost      | int(20)  | YES  |     | NULL    |       |
++-----------+----------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> insert into book_publishing_company values
+    -> (321,'chemistry','raju',250),(142,'maths','sonu',200),(541,'tamil','ishu',150),(423,'ram','english',159),(654,'biology','suma',450);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select*from book_publishing_company;
++---------+-----------+---------+------+
+| book_no | book_name | author  | cost |
++---------+-----------+---------+------+
+|     321 | chemistry | raju    |  250 |
+|     142 | maths     | sonu    |  200 |
+|     541 | tamil     | ishu    |  150 |
+|     423 | ram       | english |  159 |
+|     654 | biology   | suma    |  450 |
++---------+-----------+---------+------+
+5 rows in set (0.00 sec)
+
+mysql> update book_publishing_company
+    -> set author='anish'
+    -> where bookno=423;
+ERROR 1054 (42S22): Unknown column 'bookno' in 'where clause'
+mysql> delete from  book_publishing_company
+    -> where book_no=423;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select *from book_publishing_company;
++---------+-----------+--------+------+
+| book_no | book_name | author | cost |
++---------+-----------+--------+------+
+|     321 | chemistry | raju   |  250 |
+|     142 | maths     | sonu   |  200 |
+|     541 | tamil     | ishu   |  150 |
+|     654 | biology   | suma   |  450 |
++---------+-----------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> update book_publishing_company
+    ->  set author='anish'
+    -> where book_no=142;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select_publishing_company;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select_publishing_company' at line 1
+mysql> select *from book_publishing_company;
++---------+-----------+--------+------+
+| book_no | book_name | author | cost |
++---------+-----------+--------+------+
+|     321 | chemistry | raju   |  250 |
+|     142 | maths     | anish  |  200 |
+|     541 | tamil     | ishu   |  150 |
+|     654 | biology   | suma   |  450 |
++---------+-----------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> create table authors(author_name char(20),sub_related char(30),written_book char(30));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc authors;
++--------------+----------+------+-----+---------+-------+
+| Field        | Type     | Null | Key | Default | Extra |
++--------------+----------+------+-----+---------+-------+
+| author_name  | char(20) | YES  |     | NULL    |       |
+| sub_related  | char(30) | YES  |     | NULL    |       |
+| written_book | char(30) | YES  |     | NULL    |       |
++--------------+----------+------+-----+---------+-------+
+3 rows in set (0.03 sec)
+
+mysql> insert into authors values('raju','chemistry','molecular_eq'),('ishu','tamil','grammer'),('anish','maths','simple_eq');
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select*from authors;
++-------------+-------------+--------------+
+| author_name | sub_related | written_book |
++-------------+-------------+--------------+
+| raju        | chemistry   | molecular_eq |
+| ishu        | tamil       | grammer      |
+| anish       | maths       | simple_eq    |
++-------------+-------------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> insert into authors values('suma','biology','heart_fn');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from authors;
++-------------+-------------+--------------+
+| author_name | sub_related | written_book |
++-------------+-------------+--------------+
+| raju        | chemistry   | molecular_eq |
+| ishu        | tamil       | grammer      |
+| anish       | maths       | simple_eq    |
+| suma        | biology     | heart_fn     |
++-------------+-------------+--------------+
+4 rows in set (0.00 sec)
+
+mysql>
