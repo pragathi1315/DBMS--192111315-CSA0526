@@ -1,0 +1,73 @@
+
+mysql> use bd;
+Database changed
+mysql> create table std_progress(id nit(10),name char(20),maths int(10),physics int(10),dbms int(10));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'nit(10),name char(20),maths int(10),physics int(10),dbms int(10))' at line 1
+mysql> create table std_progress(id int(10),name char(20),maths int(10),physics int(10),dbms int(10));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc std_progress;
++---------+----------+------+-----+---------+-------+
+| Field   | Type     | Null | Key | Default | Extra |
++---------+----------+------+-----+---------+-------+
+| id      | int(10)  | YES  |     | NULL    |       |
+| name    | char(20) | YES  |     | NULL    |       |
+| maths   | int(10)  | YES  |     | NULL    |       |
+| physics | int(10)  | YES  |     | NULL    |       |
+| dbms    | int(10)  | YES  |     | NULL    |       |
++---------+----------+------+-----+---------+-------+
+5 rows in set (0.03 sec)
+
+mysql> alter table std_progress add total int(10);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table std_progress add grade char(2);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc std_progress;
++---------+----------+------+-----+---------+-------+
+| Field   | Type     | Null | Key | Default | Extra |
++---------+----------+------+-----+---------+-------+
+| id      | int(10)  | YES  |     | NULL    |       |
+| name    | char(20) | YES  |     | NULL    |       |
+| maths   | int(10)  | YES  |     | NULL    |       |
+| physics | int(10)  | YES  |     | NULL    |       |
+| dbms    | int(10)  | YES  |     | NULL    |       |
+| total   | int(10)  | YES  |     | NULL    |       |
+| grade   | char(2)  | YES  |     | NULL    |       |
++---------+----------+------+-----+---------+-------+
+7 rows in set (0.03 sec)
+
+mysql> insert into std_progress values(1,'SRIDHAR',99,98,97,294,'S'),(2,'RAM',74,87,95,256,'A'),(3,'RAJU',99,99,99,297,'S');
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT*FROM std_progress;
++------+---------+-------+---------+------+-------+-------+
+| id   | name    | maths | physics | dbms | total | grade |
++------+---------+-------+---------+------+-------+-------+
+|    1 | SRIDHAR |    99 |      98 |   97 |   294 | S     |
+|    2 | RAM     |    74 |      87 |   95 |   256 | A     |
+|    3 | RAJU    |    99 |      99 |   99 |   297 | S     |
++------+---------+-------+---------+------+-------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select id,total,
+    -> case
+    -> when total>200 then 'the mark grade is greater than 200'
+    -> when total=200 then 'the mark grade is 200'
+    -> else 'the mark grade is above 200'
+    -> end as totalgrade
+    -> from std_progress;
++------+-------+------------------------------------+
+| id   | total | totalgrade                         |
++------+-------+------------------------------------+
+|    1 |   294 | the mark grade is greater than 200 |
+|    2 |   256 | the mark grade is greater than 200 |
+|    3 |   297 | the mark grade is greater than 200 |
++------+-------+------------------------------------+
+3 rows in set (0.01 sec)
+
+mysql>
