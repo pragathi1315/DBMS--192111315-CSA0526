@@ -43,6 +43,8 @@
 [sqlquries](https://github.com/pragathi1315/DBMS--192111315-CSA0526/blob/main/dbms%20exp-22'txt.txt)
 # exp_23
 [sqlquries](https://github.com/pragathi1315/DBMS--192111315-CSA0526/blob/main/dbms%20exp_23.txt)
+# eexp_24
+[sqlquries](https://github.com/pragathi1315/DBMS--192111315-CSA0526/blob/main/dbms%20exp-24.txt)
 
 
 
