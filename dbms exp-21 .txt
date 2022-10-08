@@ -1,0 +1,55 @@
+
+mysql> use bd
+Database changed
+mysql> select*from hrm;
++---------+------+--------+
+| name    | dob  | gender |
++---------+------+--------+
+| MARRY   | 1979 | F      |
+| SINDHU  | 1979 | F      |
+| RUCHI   | 1977 | M      |
+| LIN DAN | 1997 | M      |
+| SONU    | 1984 | M      |
++---------+------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select*from hrm_2;
++-----------+--------+
+| sport     | medals |
++-----------+--------+
+| badminton |      8 |
+| boxing    |      5 |
+| swimming  |      3 |
+| badminton |      3 |
++-----------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select name,count(*) from hrm h,hrm_2 r where r.medals=h.dob
+    -> and r.medals in(select h1.dob from hrm1 group by h1.dob having count(*)>=1)
+    -> order by dob;
+ERROR 1146 (42S02): Table 'bd.hrm1' doesn't exist
+mysql>  select name,count(*) from hrm h,hrm_2 r where r.medals=h.dob
+    -> and r.medals in(select h1.dob from hrm h1 group by h1.dob having count(*)>=1)
+    -> order by dob;
++------+----------+
+| name | count(*) |
++------+----------+
+| NULL |        0 |
++------+----------+
+1 row in set (0.01 sec)
+
+mysql> select name,dob
+    -> from hrm
+    -> where dob>'2000';
+Empty set (0.00 sec)
+
+mysql> select name,dob
+    -> from hrm
+    -> where dob>'1980';
++---------+------+
+| name    | dob  |
++---------+------+
+| LIN DAN | 1997 |
+| SONU    | 1984 |
++---------+------+
+2 rows in set (0.00 sec)
